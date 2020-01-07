@@ -21,8 +21,33 @@ namespace ExceptionsDemo
             Serenity.AddCrew("Medic", "Simon Tam");
             Serenity.AddCrew("Crew", "River Tam");
 
+            
             Serenity.Print();
             Serenity.PrintRoster();
+
+            //Begin trying exception handling
+
+            try
+            {
+                string position = "Saboteur";
+                string name = "Axl Rose";
+                //Too many crew members, not enough space
+                if (Serenity.CurrentCrewSize() >= Serenity.CrewCapacity)
+                {
+                    throw new StarshipException(name);
+                }
+                else
+                {
+                    Serenity.AddCrew(position, name);
+                }
+            }
+            catch (StarshipException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            //End trying exception handling
+
             Console.ReadLine();
         }
     }
